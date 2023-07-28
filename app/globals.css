@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee&display=swap");
+
+body {
+  background: #000000;
+  color: white;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    90deg,
+    #ff3bff 0%,
+    #ecbfbf 38.02%,
+    #5c24ff 75.83%,
+    #d94fd5 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.boost-text-gradient {
+  background: linear-gradient(90deg, #4e4be4 1.04%, #e862fe 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.abeeZee-style {
+  font-family: "ABeeZee", sans-serif;
+}
+
+.border-gradient {
+  border-image-slice: 1;
+  border-width: 1px;
+  border-image-source: linear-gradient(
+    90deg,
+    #ff3bff 0%,
+    #ecbfbf 38.02%,
+    #5c24ff 75.83%,
+    #d94fd5 100%
+  );
+}
+
+.border-gradient-rounded {
+  border: 1px solid transparent;
+  border-radius: 50px;
+  background: linear-gradient(to right, black, black),
+    linear-gradient(
+      90deg,
+      #ff3bff 0%,
+      #ecbfbf 38.02%,
+      #5c24ff 75.83%,
+      #d94fd5 100%
+    );
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+
