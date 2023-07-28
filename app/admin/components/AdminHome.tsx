@@ -24,7 +24,7 @@ const AdminHome = () => {
     []
   );
   const fetchEmails = () => {
-    const toastId = toast.loading("Loading...");
+    const toastId = toast.loading("Fetching data...");
     axios
       .get("/api/waitlistEmail")
       .then((data) => {
@@ -80,7 +80,7 @@ const AdminHome = () => {
           </thead>
           <tbody className=" ">
             {/*Table row */}
-            {emails
+            {emails.length > 0 && emails
               .filter((email: EmailList) =>
                 email.email
                   .toString()

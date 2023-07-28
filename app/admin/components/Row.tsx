@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { EmailList } from "@/app/types";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import moment from "moment";
 
 interface RowProps {
   data: EmailList;
@@ -104,7 +105,7 @@ const Row = ({ data, onClick }: RowProps) => {
         <td className="px-6 py-4">
           <div className="flex gap-2">
             <span className="inline-flex items-center gap-1 rounded  px-2 py-1 text-xs font-semibold ">
-              {createdAt}
+              {moment(createdAt).format("MMM Do YYYY")}
             </span>
           </div>
         </td>
