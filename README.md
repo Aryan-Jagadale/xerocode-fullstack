@@ -25,7 +25,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Error one may face:
-
+In package.json, don't mess with the "postinstall" it may cause error in production, For reference: [https://github.com/prisma/prisma/issues/7579](https://github.com/prisma/prisma/issues/7579)
 
 
 ## Deploy on Vercel
