@@ -25,7 +25,8 @@ const HeadingText = ({ text, styleType }: HeadingTextProps) => {
             md:text-5xl
             text-gradient
             p-3
-            md:p-0
+            md:py-0
+            md:px-5
             `,
           styleType === "boost" && "boost-text-gradient text-3xl",
           styleType === "footer" && " text-gradient px-4 text-3xl "
