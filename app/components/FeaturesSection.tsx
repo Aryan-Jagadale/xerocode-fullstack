@@ -5,7 +5,7 @@ import Card from "./FeatureSectionComp/Card";
 
 const FeaturesSection = () => {
   return (
-    <div className="container m-auto md:grid h-full md:h-[75vh] grid-cols-2 md:grid-cols-3 gap-4 p-4 md:p-8">
+    <div className="container m-auto md:grid h-full md:h-[65vh] grid-cols-2 md:grid-cols-3 gap-4 p-4 md:p-8">
       <div
         className={clsx(`
         bg-[#181924]
