@@ -11,7 +11,7 @@ const FeaturesSection = () => {
         bg-[#181924]
         rounded-md
         
-        h-1/3
+        h-[45%]
         flex
         items-center
         justify-center
@@ -99,7 +99,7 @@ const FeaturesSection = () => {
         className={clsx(`
         bg-[#181924]
         rounded-md
-        h-1/3
+        h-[45%]
         flex
         items-center
         justify-center
