@@ -22,14 +22,14 @@ const Modal = ({ data,setModalVisible }: RowProps) => {
       .put(`/api/waitlistEmail/${data.id}`, { email: newEmail })
       .then(() => {
         toast.success("Updated")
-        setModalVisible(false)
+        //setModalVisible(false)
         toast.dismiss(loaderID)
       })
       .catch(() => toast.error("Something went wrong."));
   };
 
   const handleClose = () => {
-    setModalVisible(false)
+    //setModalVisible(false)
   }
 
   return (
