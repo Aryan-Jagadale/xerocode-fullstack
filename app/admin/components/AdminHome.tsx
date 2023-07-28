@@ -14,11 +14,14 @@ const AdminHome = () => {
 
   const handleDelete = useCallback(
     (userInfo: { id: string; email: string; createdAt?: string }) => {
-      console.log(userInfo.id);
-
+      //console.log(userInfo.id);
+      const deleteID = toast.loading("Removing...");
       axios
         .delete(`/api/waitlistEmail/${userInfo.id}`)
-        .then(() => fetchEmails())
+        .then(() => {
+          toast.dismiss(deleteID);
+          fetchEmails();
+        })
         .catch(() => toast.error("Went wrong in delete"));
     },
     []
@@ -80,20 +83,21 @@ const AdminHome = () => {
           </thead>
           <tbody className=" ">
             {/*Table row */}
-            {emails.length > 0 && emails
-              .filter((email: EmailList) =>
-                email.email
-                  .toString()
-                  .toLowerCase()
-                  .includes(keyword.toString().toLowerCase())
-              )
-              .map((userInfo: any) => (
-                <Row
-                  key={userInfo.id}
-                  data={userInfo}
-                  onClick={() => handleDelete(userInfo)}
-                />
-              ))}
+            {emails.length > 0 &&
+              emails
+                .filter((email: EmailList) =>
+                  email.email
+                    .toString()
+                    .toLowerCase()
+                    .includes(keyword.toString().toLowerCase())
+                )
+                .map((userInfo: any) => (
+                  <Row
+                    key={userInfo.id}
+                    data={userInfo}
+                    onClick={() => handleDelete(userInfo)}
+                  />
+                ))}
           </tbody>
         </table>
       </div>

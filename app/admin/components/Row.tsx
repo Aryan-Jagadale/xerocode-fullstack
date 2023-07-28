@@ -9,18 +9,28 @@ import moment from "moment";
 interface RowProps {
   data: EmailList;
   onClick?: () => void;
+  setModalVisible?:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = ({ data }: RowProps) => {
-  const [email, setEmail] = useState(data.email);
+const Modal = ({ data,setModalVisible }: RowProps) => {
+  const [newEmail, setEmail] = useState(data.email);
 
   const handleEditSubmit = () => {
-    //console.log(data.id);
+    //console.log(data.email, newEmail);
+    const loaderID = toast.loading("Updating...")
     axios
-      .put(`/api/waitlistEmail/${data.id}`, { email: data.email })
-      .then(() => toast.success("Updated"))
+      .put(`/api/waitlistEmail/${data.id}`, { email: newEmail })
+      .then(() => {
+        toast.success("Updated")
+        setModalVisible(false)
+        toast.dismiss(loaderID)
+      })
       .catch(() => toast.error("Something went wrong."));
   };
+
+  const handleClose = () => {
+    setModalVisible(false)
+  }
 
   return (
     <div>
@@ -43,7 +53,7 @@ const Modal = ({ data }: RowProps) => {
               id="name"
               className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
               placeholder={data.email}
-              value={email}
+              value={newEmail}
               onChange={(e) => setEmail(e.target.value)}
             />
 
@@ -54,11 +64,11 @@ const Modal = ({ data }: RowProps) => {
               >
                 Submit
               </button>
-              <button className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm">
+              <button  onClick={handleClose} className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm">
                 Cancel
               </button>
             </div>
-            <div className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out">
+            <div onClick={handleClose} className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="Close"
@@ -85,8 +95,8 @@ const Modal = ({ data }: RowProps) => {
 };
 
 const Row = ({ data, onClick }: RowProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const { id, email, createdAt } = data;
 
   //console.log(typeof(id),id);
@@ -129,7 +139,7 @@ const Row = ({ data, onClick }: RowProps) => {
           </div>
         </td>
       </tr>
-      {modalVisible && <Modal data={data} />}
+      {modalVisible && <Modal data={data} setModalVisible={setModalVisible} />}
     </>
   );
 };
