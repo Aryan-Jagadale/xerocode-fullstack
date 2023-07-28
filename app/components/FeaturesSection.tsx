@@ -16,6 +16,7 @@ const FeaturesSection = () => {
         items-center
         justify-center
         flex-col
+        p-4
       `)}
       >
         <Card label={"CI/CD Pipeline Generate"} />
@@ -103,6 +104,7 @@ const FeaturesSection = () => {
         items-center
         justify-center
         flex-col
+        p-4
       `)}
       >
         <Card label={"Generate Test Cases"} />
