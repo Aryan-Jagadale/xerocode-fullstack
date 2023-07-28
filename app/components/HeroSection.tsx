@@ -44,13 +44,12 @@ const HeroSection = () => {
 
       <WailtListForm />
 
-      <div className="flex items-center justify-center mt-4 md:my-2" >
+      <div className="flex items-center justify-center mt-4 md:my-2">
         <Image
           src={"/images/banner.webp"}
           alt="Bannner"
           width={950}
           height={900}
-          
           priority
         />
       </div>
