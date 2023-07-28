@@ -9,28 +9,28 @@ import moment from "moment";
 interface RowProps {
   data: EmailList;
   onClick?: () => void;
-  setModalVisible?:(value: boolean ) => void;
+  setModalVisible?: any;
 }
 
-const Modal = ({ data,setModalVisible }: RowProps) => {
+const Modal = ({ data, setModalVisible }: RowProps) => {
   const [newEmail, setEmail] = useState(data.email);
 
   const handleEditSubmit = () => {
     console.log(data.email, newEmail);
-    const loaderID = toast.loading("Updating...")
+    const loaderID = toast.loading("Updating...");
     axios
       .put(`/api/waitlistEmail/${data.id}`, { email: newEmail })
       .then(() => {
-        toast.success("Updated")
-        //setModalVisible(false)
-        toast.dismiss(loaderID)
+        toast.success("Updated");
+        setModalVisible(false);
+        toast.dismiss(loaderID);
       })
       .catch(() => toast.error("Something went wrong."));
   };
 
   const handleClose = () => {
-    //setModalVisible(false)
-  }
+    setModalVisible(false);
+  };
 
   return (
     <div>
@@ -64,11 +64,17 @@ const Modal = ({ data,setModalVisible }: RowProps) => {
               >
                 Submit
               </button>
-              <button  onClick={handleClose} className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm">
+              <button
+                onClick={handleClose}
+                className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+              >
                 Cancel
               </button>
             </div>
-            <div onClick={handleClose} className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out">
+            <div
+              onClick={handleClose}
+              className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="Close"
@@ -100,6 +106,8 @@ const Row = ({ data, onClick }: RowProps) => {
   const { id, email, createdAt } = data;
 
   //console.log(typeof(id),id);
+
+  console.log(modalVisible);
 
   return (
     <>
