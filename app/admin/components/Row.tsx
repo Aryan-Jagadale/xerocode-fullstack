@@ -15,6 +15,7 @@ interface RowProps {
 const Modal = ({ data, setModalVisible }: RowProps) => {
   const [newEmail, setEmail] = useState(data.email);
 
+  
   const handleEditSubmit = () => {
     console.log(data.email, newEmail);
     const loaderID = toast.loading("Updating...");
@@ -23,6 +24,7 @@ const Modal = ({ data, setModalVisible }: RowProps) => {
       .then(() => {
         toast.success("Updated");
         setModalVisible(false);
+        window.location.reload()
         toast.dismiss(loaderID);
       })
       .catch(() => toast.error("Something went wrong."));
