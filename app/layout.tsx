@@ -1,9 +1,8 @@
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import "./globals.css";
 import type { Metadata } from "next";
-import {  Open_Sans } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-
-
 
 export const openSans = Open_Sans({
   subsets: ["latin"],
@@ -21,13 +20,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
- 
   return (
     <html lang="en">
       <body>
-      
-        <Toaster />
-        {children}
+          <Toaster />
+          {children}
+        
       </body>
     </html>
   );

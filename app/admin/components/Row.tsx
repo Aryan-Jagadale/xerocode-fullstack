@@ -9,14 +9,14 @@ import moment from "moment";
 interface RowProps {
   data: EmailList;
   onClick?: () => void;
-  setModalVisible?:React.Dispatch<React.SetStateAction<boolean>>;
+  setModalVisible?:(value: boolean ) => void;
 }
 
 const Modal = ({ data,setModalVisible }: RowProps) => {
   const [newEmail, setEmail] = useState(data.email);
 
   const handleEditSubmit = () => {
-    //console.log(data.email, newEmail);
+    console.log(data.email, newEmail);
     const loaderID = toast.loading("Updating...")
     axios
       .put(`/api/waitlistEmail/${data.id}`, { email: newEmail })
@@ -96,7 +96,7 @@ const Modal = ({ data,setModalVisible }: RowProps) => {
 
 const Row = ({ data, onClick }: RowProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const { id, email, createdAt } = data;
 
   //console.log(typeof(id),id);

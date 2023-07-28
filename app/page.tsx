@@ -5,19 +5,21 @@ import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar/Navbar";
 import WorkFlow from "./components/WorkFlow";
 
-export default function Home() {
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
+export default function Home() {
   return (
     <>
-     
-      <main>
-        <Navbar />
-        <HeroSection />
-        <BoostSection />
-        <FeaturesSection />
-        <WorkFlow />
-        <Footer />
-      </main>
+      <UserProvider>
+        <main>
+          <Navbar />
+          <HeroSection />
+          <BoostSection />
+          <FeaturesSection />
+          <WorkFlow />
+          <Footer />
+        </main>
+      </UserProvider>
     </>
   );
 }
