@@ -3,42 +3,37 @@
 import { openSans } from "@/app/layout";
 
 import Row from "./Row";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-
 
 const AdminHome = () => {
   const [keyword, setKeyword] = useState("");
   const [emails, setEmails] = useState([]);
 
-  
-
-  const handleDelete = (userInfo: {
-    id: string;
-    email: string;
-    createdAt?: string;
-  }) => {
-    console.log(userInfo.id);
+  const handleDelete = useCallback(
+    (userInfo: { id: string; email: string; createdAt?: string }) => {
+      console.log(userInfo.id);
 
       axios
         .delete(`/api/waitlistEmail/${userInfo.id}`)
         .then(() => toast.success("Deleted"))
+        .then(() => fetchEmails())
         .catch(() => toast.error("Went wrong in delete"));
-    
+    },
+    []
+  );
+  const fetchEmails = () => {
+    axios
+      .get("/api/waitlistEmail")
+      .then((data) => {
+        //console.log("Data-->", data.data);
+        setEmails(data.data);
+        //toast.success("Data fetched");
+      })
+      .catch((error) => toast.error("Unable to fetch data."));
   };
-
   useEffect(() => {
-    const fetchEmails = () => {
-      axios
-        .get("/api/waitlistEmail")
-        .then((data) => {
-          //console.log("Data-->", data.data);
-          setEmails(data.data);
-          toast.success("Data fetched");
-        })
-        .catch((error) => toast.error("Unable to fetch data."));
-    };
     fetchEmails();
   }, []);
 
@@ -88,10 +83,7 @@ const AdminHome = () => {
                 key={userInfo.id}
                 data={userInfo}
                 onClick={() => handleDelete(userInfo)}
-
-
-
-                />
+              />
             ))}
           </tbody>
         </table>
