@@ -6,6 +6,7 @@ import Row from "./Row";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { EmailList } from "@/app/types";
 
 const AdminHome = () => {
   const [keyword, setKeyword] = useState("");
@@ -17,19 +18,20 @@ const AdminHome = () => {
 
       axios
         .delete(`/api/waitlistEmail/${userInfo.id}`)
-        .then(() => toast.success("Deleted"))
         .then(() => fetchEmails())
         .catch(() => toast.error("Went wrong in delete"));
     },
     []
   );
   const fetchEmails = () => {
+    const toastId = toast.loading("Loading...");
     axios
       .get("/api/waitlistEmail")
       .then((data) => {
         //console.log("Data-->", data.data);
         setEmails(data.data);
         //toast.success("Data fetched");
+        toast.dismiss(toastId);
       })
       .catch((error) => toast.error("Unable to fetch data."));
   };
@@ -78,13 +80,20 @@ const AdminHome = () => {
           </thead>
           <tbody className=" ">
             {/*Table row */}
-            {emails.map((userInfo: any) => (
-              <Row
-                key={userInfo.id}
-                data={userInfo}
-                onClick={() => handleDelete(userInfo)}
-              />
-            ))}
+            {emails
+              .filter((email: EmailList) =>
+                email.email
+                  .toString()
+                  .toLowerCase()
+                  .includes(keyword.toString().toLowerCase())
+              )
+              .map((userInfo: any) => (
+                <Row
+                  key={userInfo.id}
+                  data={userInfo}
+                  onClick={() => handleDelete(userInfo)}
+                />
+              ))}
           </tbody>
         </table>
       </div>
